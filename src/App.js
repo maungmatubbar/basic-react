@@ -23,13 +23,29 @@ function App() {
       setAlert(null)
     },1500)
   }
-  const toggleMode = () =>{
+  function removeBodyClasses()
+  {
+    document.body.classList.remove('primary')
+    document.body.classList.remove('warning')
+    document.body.classList.remove('danger')
+    document.body.classList.remove('secondary')
+  }
+  const toggleMode = (cls) =>{
+    removeBodyClasses();
+    document.body.classList.add('bg-'+cls)
     if(mode ==='light')
     {
       setMode('dark')
       document.body.style.backgroundColor = '#046b6b'
       document.body.style.color = 'white'
       showAlert('Dark mode has been enabled','success')
+      document.title = 'Dark Mode Enable';
+      setInterval(() => {
+        document.title = 'Install text-utilities';
+      }, 1500);
+      setInterval(() => {
+        document.title = 'Install now';
+      }, 2000);
     }
     else
     {
@@ -37,6 +53,7 @@ function App() {
       document.body.style.backgroundColor = 'white'
       document.body.style.color = 'black'
       showAlert('Light mode has been enabled','success')
+      document.title = 'Light Mode Enable'
     }
     
   }
@@ -55,7 +72,7 @@ function App() {
                 <About />
               </Route>
               <Route exact path="/">
-                <TextForm showAlert={showAlert} heading="Enter the text to analize" mode={mode} />
+                <TextForm showAlert={showAlert} heading="TextUtils - Word counter, Character counter, Remove extra spaces, Copy text" mode={mode} />
               </Route>
           </Switch>
         </div>
